@@ -1,44 +1,32 @@
-fruits = ['apple', 'mango', 'orange', 'banana']
+todo_file = open("todo.txt",'w')
 
-print(type(fruits))
+def print_todo(live = None):
+    print("*"*100)
+    print("You have the following contents on your todo: \n")
+    if live is not None:
+        for i, todo in enumerate(live):
+            print(f"{i+1}. {todo}")
+        return 0
 
-# indexing: selecting (taking out) an item from the data. In indexing,
-# python always starts from 0. That means, the first item can be accessed
-# from 0 and not 1.
+    my_file = open('todo.txt','r').readlines()
+    for i, todo in enumerate(my_file):
+        print(f"{i+1}. {todo}")
 
-# Indexing can be done by: variable_name[n]    -> where n is a number 
+todo_list = []
+while True:
+    print("="*100)
+    inp = input("DO you want to add to your todo list?: ")
+    print("="*100)
 
+    if ((inp.upper() == "Y") or (inp.upper() == "YES")):
+        write = input("Write your todo here: ")
+        todo_file.write(write)
+        todo_file.write('\n')
 
-print(fruits[0])
-print(fruits[1])
-print(fruits[2])
-print(fruits[3])
+        todo_list.append(write)
+        print_todo(todo_list)
+    else:
+        break
 
-
-# negative indexing starts with variable_name[-n] where n is the length of number 
-
-
-print(len(fruits)) # displays length of fruits
-
-print(fruits[-1])
-print(fruits[-2])
-print(fruits[-3])
-print(fruits[-4])
-
-
-for item in fruits:
-    print(f"name of the fruit is {item}")  
-
-
-"""
-for index in range(len(fruits)):
-    name = fruits[index]
-    print(name)
-"""
-
-# using while loop
-i = 0
-while i < len(fruits):    # while i is less than length of item in fruits
-
-    print(fruits[i])
-    i = i + 1
+todo_file.close()
+print_todo()
